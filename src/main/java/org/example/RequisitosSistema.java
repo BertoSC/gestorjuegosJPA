@@ -3,10 +3,12 @@ package org.example;
 import jakarta.persistence.*;
 @Entity
 public class RequisitosSistema {
+    @Id
+    Integer idJuego;
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @MapsId
     @JoinColumn(name = "idJuego")
-    Juego idJuego;
+    Juego juego;
     String almacenamiento;
     String graficos;
     String memoria;
@@ -25,7 +27,7 @@ public class RequisitosSistema {
     }
 
     public RequisitosSistema(Juego idJuego, String almacenamiento, String graficos, String memoria, String os, String procesador) {
-        this.idJuego = idJuego;
+        this.juego = idJuego;
         this.almacenamiento = almacenamiento;
         this.graficos = graficos;
         this.memoria = memoria;
@@ -34,11 +36,11 @@ public class RequisitosSistema {
     }
 
     public Juego getIdJuego() {
-        return idJuego;
+        return juego;
     }
 
     public void setIdJuego(Juego idJuego) {
-        this.idJuego = idJuego;
+        this.juego = idJuego;
     }
 
     public String getAlmacenamiento() {
@@ -84,7 +86,7 @@ public class RequisitosSistema {
     @Override
     public String toString() {
         return "RequisitosSistema{" +
-                "idJuego=" + idJuego +
+                "idJuego=" + juego.getIdJuego() +
                 ", almacenamiento='" + almacenamiento + '\'' +
                 ", graficos='" + graficos + '\'' +
                 ", memoria='" + memoria + '\'' +

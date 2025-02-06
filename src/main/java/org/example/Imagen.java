@@ -12,9 +12,11 @@ public class Imagen {
     @Id
     Integer idImagen;
     @ManyToOne
-    @JoinColumn (name = "idJuego", foreignKey = @ForeignKey(name = "idJuego"))
+    @JoinColumn (name = "idJuego")
     Juego juego;
     String url;
+    @Lob
+    @Column(length = 1000000)
     byte [] imagen;
 
     public Imagen() {

@@ -1,8 +1,18 @@
 package org.example;
 
+import jakarta.persistence.EntityManager;
+
 import java.util.List;
 
 public class RequisitosDAO implements DAO<RequisitosSistema>{
+    EntityManager em;
+
+    public RequisitosDAO(EntityManager em){
+        this.em=em;
+    }
+
+
+
     @Override
     public RequisitosSistema get(Integer id) {
         return null;
@@ -20,6 +30,9 @@ public class RequisitosDAO implements DAO<RequisitosSistema>{
 
     @Override
     public void save(RequisitosSistema requisitosSistema) {
+        em.getTransaction().begin();
+        em.persist(requisitosSistema);
+        em.getTransaction().commit();
 
     }
 

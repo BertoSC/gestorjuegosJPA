@@ -19,12 +19,13 @@ public class Juego {
     String miniatura;
     String estado;
     String descripcionCorta;
+    @Column(length = 10000)
     String descripcion;
     String url;
     String editor;
     String desarrollador;
     LocalDate fecha;
-    @OneToMany  //(mappedBy = "juego")
+    @OneToMany(mappedBy = "juego", cascade = CascadeType.ALL, orphanRemoval = true)
     List<Imagen> imagenes;
     @Transient
     RequisitosSistema requisitos;

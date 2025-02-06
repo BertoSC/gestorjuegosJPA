@@ -22,13 +22,27 @@ public class PlataformaDAO implements DAO<Plataforma>{
 
     @Override
     public Plataforma getByName(String name) {
-        TypedQuery<Plataforma> consulta = em.createQuery("select p from Plataforma p where p.nombre=name", Plataforma.class);
+        TypedQuery<Plataforma> consulta = em.createQuery("select p from Plataforma p where p.nombre = :name", Plataforma.class);
+        consulta.setParameter("name", name); // Aquí se establece el parámetro
         return consulta.getSingleResult();
+    }
+
+    public Integer getIdByNamePlataforma(String name) {
+
+            // Hacemos la consulta con un parámetro named 'name' que busca la plataforma por su nombre
+            TypedQuery<Integer> query = em.createQuery(
+                    "SELECT p.idPlataforma FROM Plataforma p WHERE lower(p.nombre) = lower(:name)", Integer.class);
+            query.setParameter("name", name.toLowerCase()); // Establecemos el parámetro 'name'
+
+            return query.getSingleResult(); // Recuperamos el id o lanzamos NoResultException si no se encuentra
+
     }
 
     @Override
     public void save(Plataforma plataforma) {
-
+        em.getTransaction().begin();
+        em.persist(plataforma);
+        em.getTransaction().commit();
     }
 
     @Override
