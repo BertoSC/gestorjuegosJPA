@@ -1,17 +1,18 @@
 package org.example;
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Arrays;
+
 @Entity
 public class Imagen {
     @Id
     Integer idImagen;
+    @ManyToOne
+    @JoinColumn (name = "idJuego", foreignKey = @ForeignKey(name = "idJuego"))
     Juego juego;
     String url;
     byte [] imagen;

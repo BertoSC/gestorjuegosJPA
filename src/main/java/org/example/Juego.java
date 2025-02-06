@@ -10,10 +10,10 @@ public class Juego {
     @Id
     Integer idJuego;
     @OneToOne
-    @JoinColumn(name = "idGenero")
+    @JoinColumn(name = "idGenero", foreignKey = @ForeignKey(name = "idGenero"))
     Genero genero;
     @OneToOne
-    @JoinColumn(name = "idPlataforma")
+    @JoinColumn(name = "idPlataforma", foreignKey = @ForeignKey(name = "idPlataforma"))
     Plataforma plataforma;
     String titulo;
     String miniatura;
@@ -24,8 +24,10 @@ public class Juego {
     String editor;
     String desarrollador;
     LocalDate fecha;
-    @OneToMany(mappedBy = "juego")
+    @OneToMany  //(mappedBy = "juego")
     List<Imagen> imagenes;
+    @Transient
+    RequisitosSistema requisitos;
 
     public Juego() {
     }
@@ -153,6 +155,22 @@ public class Juego {
 
     public void setFecha(LocalDate fecha) {
         this.fecha = fecha;
+    }
+
+    public List<Imagen> getImagenes() {
+        return imagenes;
+    }
+
+    public void setImagenes(List<Imagen> imagenes) {
+        this.imagenes = imagenes;
+    }
+
+    public RequisitosSistema getRequisitos() {
+        return requisitos;
+    }
+
+    public void setRequisitos(RequisitosSistema requisitos) {
+        this.requisitos = requisitos;
     }
 
     @Override
