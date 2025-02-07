@@ -55,12 +55,12 @@ public class APPGame {
                 .setPrettyPrinting()
                 .registerTypeAdapter(Juego.class, new JuegoDeserializer())
                 .create();
-        System.out.println(json);
+        //System.out.println(json);
 
         Juego juego = gson.fromJson(json, Juego.class);
         //System.out.println(juego);
-        RequisitosSistema req = juego.getRequisitos();
-        System.out.println(req);
+        //RequisitosSistema req = juego.getRequisitos();
+        //System.out.println(req);
 
         if (persistirJuego(juego)){
             System.out.println("Juego almacenado con éxito");
@@ -75,20 +75,15 @@ public class APPGame {
         generoDAO.save(tempGen);
         Plataforma tempPlat = juego.getPlataforma();
         plataformaDAO.save(tempPlat);
-
-
         juegoDAO.save(juego);
+
         List<Imagen> imagenes = juego.getImagenes();
         for (Imagen img: imagenes){
             imagenDAO.save(img);
         }
 
-
-
         RequisitosSistema req = juego.getRequisitos();
         requisitosDAO.save(req);
-
-
 
         return true;
     }
